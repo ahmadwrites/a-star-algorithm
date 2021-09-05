@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ======== STYLE CSS ======== -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>A* Algorithm</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1 class="container__title">A* Algorithm Pathfinder</h1>
+            <div class="button__container">
+                <button class="btn btn-reset" id="reset">Reset</button>
+                <button class="btn" id="btn">Search</button>
+            </div>
+
+            <!-- Alert -->
+            <div class="alert__container">
+                <h3 class="alert__text" id="shortest">Shortest distance is: 0</span></h3>
+                
+                <div class="color__container">
+                    <div>
+                        <div class="grid__example"></div>
+                        <span>Normal</span>
+                    </div>
+                    <div>
+                        <div class="grid__example" style="background-color: orange"></div>
+                        <span>Start</span>
+                    </div>
+                    <div>
+                        <div class="grid__example" style="background-color: turquoise"></div>
+                        <span>End</span>
+                    </div>
+                    <div>
+                        <div class="grid__example" style="background-color: black"></div>
+                        <span>Barrier</span>
+                    </div>
+                    <div>
+                        <div class="grid__example" style="background-color: green"></div>
+                        <span>Open</span>
+                    </div>
+                    <div>
+                        <div class="grid__example" style="background-color: red"></div>
+                        <span>Closed</span>
+                    </div>
+                    <div>
+                        <div class="grid__example" style="background-color: purple"></div>
+                        <span>Path</span>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="grid__container" id="grid-container">
+                <!-- ROW 1 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+
+                <!-- ROW 2 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+
+                <!-- ROW 3 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+
+                <!-- ROW 4 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+
+                <!-- ROW 5 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>          
+                
+                <!-- ROW 6 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>    
+
+                <!-- ROW 7 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>    
+
+                <!-- ROW 8 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>    
+
+                <!-- ROW 9 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>    
+
+                <!-- ROW 10 -->
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>
+                <div class="grid__item"></div>    
+            </div>
+        </div>
+    </main>
+
+    <!-- ======== MAIN JS ======== -->
+    <script src="main.js"></script>
+
+</body>
+</html>
