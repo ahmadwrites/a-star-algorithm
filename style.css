@@ -128,3 +128,65 @@ body{
 .grid__item.is__path{
     background-color: purple;
 }
+
+@media screen and (max-width: 768px) {
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        width: auto;
+        background-color: var(--blue-color-6);
+        flex-direction: column;
+        gap: 1rem;
+        position: relative;
+    }
+
+    .color__container{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .container__title{
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .btn{
+        outline: none;
+        border: none;
+        font-size: .5rem;
+        background-color: var(--blue-color-4);
+        padding: 1rem;
+        color: #fff;
+        border-radius: .5rem;
+    }
+    
+    .grid__item, 
+    .grid__example{
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .alert__text{
+        text-align: center;
+    }
+
+    .alert__container{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-self: center;
+        flex-direction: column;
+        top: 105%; 
+        right: 50%;
+        transform: translate(50%,0);
+    }
+
+    .color__container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-content: center;
+    }
+}
