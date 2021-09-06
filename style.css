@@ -88,7 +88,9 @@ main{
 .color__container > div > span{
     color: var(--blue-color-1);
 }
-
+.alert__container{
+    width: 250px;
+}
 .grid__container{
     display: grid;
     grid-template-columns: repeat(20, 1fr);
@@ -183,7 +185,10 @@ main{
         border-radius: .5rem;
     }
 
-    
+    .alert__container{
+        width: auto;
+        align-items: center;
+    }
     
     .grid__item, 
     .grid__example{

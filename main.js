@@ -211,6 +211,7 @@ slider.addEventListener('change', () => {
     count = 0
     cost = 0
     clickCount = 0
+    span.innerText = `Shortest distance is: ${cost}`
     createGrid(document.getElementById('slider').value)
 })
 
