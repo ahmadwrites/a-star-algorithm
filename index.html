@@ -18,167 +18,59 @@
                 <button class="btn" id="btn">Search</button>
             </div>
 
-            <!-- Alert -->
-            <div class="alert__container">
-                <h3 class="alert__text" id="shortest">Shortest distance is: 0</span></h3>
-                
-                <div class="color__container">
-                    <div>
-                        <div class="grid__example"></div>
-                        <span>Normal</span>
-                    </div>
-                    <div>
-                        <div class="grid__example" style="background-color: orange"></div>
-                        <span>Start</span>
-                    </div>
-                    <div>
-                        <div class="grid__example" style="background-color: turquoise"></div>
-                        <span>End</span>
-                    </div>
-                    <div>
-                        <div class="grid__example" style="background-color: black"></div>
-                        <span>Barrier</span>
-                    </div>
-                    <div>
-                        <div class="grid__example" style="background-color: green"></div>
-                        <span>Open</span>
-                    </div>
-                    <div>
-                        <div class="grid__example" style="background-color: red"></div>
-                        <span>Closed</span>
-                    </div>
-                    <div>
-                        <div class="grid__example" style="background-color: purple"></div>
-                        <span>Path</span>
-                    </div>
-                </div>
-                
+            <div class="slider__container">
+                <input oninput="this.nextElementSibling.value = this.value" step="5" type="range" min="10" max="20" value="15" class="slider" id="slider">
+                <output class="slider__output">15</output>
             </div>
 
-            <div class="grid__container" id="grid-container">
-                <!-- ROW 1 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-
-                <!-- ROW 2 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-
-                <!-- ROW 3 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-
-                <!-- ROW 4 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-
-                <!-- ROW 5 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>          
+            <div class="content__container">
+                <!-- Grid Container -->
+                <div class="grid__container" id="grid-container">
                 
-                <!-- ROW 6 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>    
+                </div>
 
-                <!-- ROW 7 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>    
-
-                <!-- ROW 8 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>    
-
-                <!-- ROW 9 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>    
-
-                <!-- ROW 10 -->
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>
-                <div class="grid__item"></div>    
+                <!-- Alert & Color Container -->
+                <div class="alert__container">
+                    <h3 class="alert__text" id="shortest">Shortest distance is: 0</span></h3>
+                    
+                    <div class="color__container">
+                        <div>
+                            <div class="grid__example"></div>
+                            <span>Normal</span>
+                        </div>
+                        <div>
+                            <div class="grid__example" style="background-color: orange"></div>
+                            <span>Start</span>
+                        </div>
+                        <div>
+                            <div class="grid__example" style="background-color: turquoise"></div>
+                            <span>End</span>
+                        </div>
+                        <div>
+                            <div class="grid__example" style="background-color: black"></div>
+                            <span>Barrier</span>
+                        </div>
+                        <div>
+                            <div class="grid__example" style="background-color: green"></div>
+                            <span>Open</span>
+                        </div>
+                        <div>
+                            <div class="grid__example" style="background-color: red"></div>
+                            <span>Closed</span>
+                        </div>
+                        <div>
+                            <div class="grid__example" style="background-color: purple"></div>
+                            <span>Path</span>
+                        </div>
+                    </div>
+                </div>                
             </div>
         </div>
     </main>
 
+    <footer class="footer__container">
+        <span>Made with love by <a class="footer__link" target="_blank" href="https://worknovel.github.io/myportfolio/">Ahmad Hasnol</a></span>
+    </footer>
     <!-- ======== MAIN JS ======== -->
     <script src="main.js"></script>
 

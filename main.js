@@ -1,3 +1,11 @@
+/*
+    To change how many grids, all we have to do is change:
+    1) CSS:
+        - grid__container grid-template-columns to number of rows/columns
+    2) JS:
+        - Update rows/columns to number of rows/columns
+*/
+
 // Priority Queue Data Structure
 // User defined class
 // to store element and its priority
@@ -84,14 +92,20 @@ class PriorityQueue {
 
 }
 
-
-const gridItems = document.querySelectorAll('.grid__item')
+// Global Variables
+const gridContainer = document.getElementById('grid-container')
 const findBtn = document.getElementById('btn')
 const resetBtn = document.getElementById('reset')
 const span = document.getElementById('shortest')
+const slider = document.getElementById('slider')
 
 let start = null
 let end = null
+let sliderValue = slider.value
+let dataRow = -1
+let dataColumn = 0 % sliderValue 
+let grid = []
+
 
 // Grid Item class
 class Spot{
@@ -166,56 +180,97 @@ class Spot{
     }
 }
 
-// Pass in the row and column of each grid item
-let dataRow = -1
-let grid = []
-for(i=0; i<gridItems.length; i++){
-    let dataColumn = i % 10 
+// Load function
+document.body.onload = createGrid(sliderValue)
 
-    // Column
-    gridItems[i].setAttribute("data-col", dataColumn)
+// Create grid on init
+function createGrid(sliderValue){
+    removeAllChildNodes(gridContainer)
+    dataRow = -1
+    dataColumn = 0 
+    gridContainer.style.gridTemplateColumns = `repeat(${sliderValue}, 1fr)`
 
-    // Row
-    if(dataColumn % 10 === 0){
-        dataRow++
-    }
-    gridItems[i].setAttribute("data-row", dataRow)
-
-    let spot = new Spot(gridItems[i], dataColumn, dataRow, i)
-
-    if(dataColumn === 10){
-        gridItems[i].setAttribute("data-row", dataRow-1)
-        spot.row = dataRow -1
+    for(i=0; i<sliderValue*sliderValue; i++){
+        let gridElement = document.createElement('div')
+        gridElement.classList.add('grid__item')
+        gridContainer.appendChild(gridElement)
     }
 
-    grid.push(spot)
+    setGrid(document.querySelectorAll('.grid__item'))
 }
 
-let clickCount = 0
-// Add event listener to change status of each grid item
-if(grid){
-    grid.forEach((spot) => {
-        spot.gridItem.addEventListener('click', () => {
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 
-            if(clickCount === 0){
-                spot.make_start()
-                start = spot
-                clickCount++
-            }
+slider.addEventListener('change', () => {
+    start = null
+    end = null
+    count = 0
+    cost = 0
+    clickCount = 0
+    createGrid(document.getElementById('slider').value)
+})
 
-            else if(clickCount === 1){
-                spot.make_end()
-                end = spot
-                clickCount++
-            }
 
-            else{
-                spot.make_barrier()
-                clickCount++
-            }
+// Pass in the row and column of each grid item to create the grid of spots
+const gridItems = document.querySelectorAll('.grid__item')
+function setGrid(gridItems){
+    grid = []
+    sliderValue = document.getElementById('slider').value
+    for(i=0; i<gridItems.length; i++){
+        dataColumn = i % sliderValue 
+
+        // Column
+        gridItems[i].setAttribute("data-col", dataColumn)
+    
+        // Row
+        if(dataColumn % sliderValue === 0){
+            dataRow++
+        }
+        gridItems[i].setAttribute("data-row", dataRow)
+    
+        let spot = new Spot(gridItems[i], dataColumn, dataRow, i)
+    
+        if(dataColumn === sliderValue){
+            gridItems[i].setAttribute("data-row", dataRow-1)
+            spot.row = dataRow -1
+        }
+    
+        grid.push(spot)
+    }
+
+    if(grid){
+        grid.forEach((spot) => {
+            spot.gridItem.addEventListener('click', () => {
+                console.log(spot)
+                if(clickCount === 0){
+                    spot.make_start()
+                    start = spot
+                    clickCount++
+                    
+                }
+    
+                else if(clickCount === 1){
+                    spot.make_end()
+                    end = spot
+                    clickCount++
+                }
+    
+                else{
+                    spot.make_barrier()
+                    clickCount++
+                }
+            })
         })
-    })
+    }
 }
+
+// Add event listener to change status of each grid item
+let clickCount = 0
+
 
 // Heuristic function 
 function h(p1, p2){
@@ -230,38 +285,38 @@ function h(p1, p2){
 
 // Update neighbors of grid spot
 function updateNeighbors(gridItem){
+    sliderValue = document.getElementById('slider').value
     gridItem.gridItem.setAttribute("data-neighbors", '[]')
 
     const row = parseInt(gridItem.gridItem.getAttribute('data-row')) //1 2
     const col = parseInt(gridItem.gridItem.getAttribute('data-col')) //1 1 
 
     let neighborArray = []
-
     // Add the neighbor above it
-    if(row < 10-1 && !(grid[col + 10 + (10*(row%10))].is_barrier())){
+    if(row < parseInt(sliderValue)-1 && !(grid[col + parseInt(sliderValue) + (parseInt(sliderValue)*(row%parseInt(sliderValue)))].is_barrier())){
         // neighborArray.push(`gridItems[${col} + 10 + (10*(${row}%10))]`)
-        neighborArray.push(grid[col + 10 + (10*(row%10))])
+        neighborArray.push(grid[col + parseInt(sliderValue) + (parseInt(sliderValue)*(row%parseInt(sliderValue)))])
         gridItem.gridItem.setAttribute("data-neighbors", neighborArray)
     } 
 
     // Add the neighbor below it
-    if(row > 0 && !(grid[col+(10*(row%10)) - 10].is_barrier())){
+    if(row > 0 && !(grid[col+(parseInt(sliderValue)*(row%parseInt(sliderValue))) - parseInt(sliderValue)].is_barrier())){
         // neighborArray.push(`gridItems[${col} + (10*(${row}%10)) - 10]`)
-        neighborArray.push(grid[col+(10*(row%10)) - 10])
+        neighborArray.push(grid[col+(parseInt(sliderValue)*(row%parseInt(sliderValue))) - parseInt(sliderValue)])
         gridItem.gridItem.setAttribute("data-neighbors", neighborArray)
     }
 
     // Add the neighbor to the right
-    if(col < 10-1 && !(grid[col+1 + (10*row)].is_barrier())){
+    if(col < parseInt(sliderValue)-1 && !(grid[col+1 + (parseInt(sliderValue)*row)].is_barrier())){
         // neighborArray.push(`gridItems[${col}+1 + (10*${row})]`)
-        neighborArray.push(grid[col+1 + (10*row)])
+        neighborArray.push(grid[col+1 + (parseInt(sliderValue)*row)])
         gridItem.gridItem.setAttribute("data-neighbors", neighborArray)
     }
 
     // Add the neighbor to the left
-    if(col > 0 && !(grid[col-1 + (10*row)].is_barrier())){
+    if(col > 0 && !(grid[col-1 + (parseInt(sliderValue)*row)].is_barrier())){
         // neighborArray.push(`gridItems[${col}-1 + (10*${row})]`)
-        neighborArray.push(grid[col-1 + (10*row)])
+        neighborArray.push(grid[col-1 + (parseInt(sliderValue)*row)])
         gridItem.gridItem.setAttribute("data-neighbors", neighborArray)
     }
 
@@ -353,6 +408,7 @@ function algorithm(){
 
 }
 
+// Find the solution
 if(findBtn){
     findBtn.addEventListener('click', () => {
         for(i=0; i<grid.length; i++){
@@ -362,6 +418,7 @@ if(findBtn){
     })
 }
 
+// Reset the solution
 if(resetBtn){
     resetBtn.addEventListener('click', () => {
         console.log('reset')
